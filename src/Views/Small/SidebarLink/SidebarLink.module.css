@@ -1,0 +1,27 @@
+.sidebarLink {
+  padding: 10px;
+  font-size: 16px;
+  list-style: none;  
+}
+
+.sidebarLink:hover {
+  cursor: pointer;
+}
+
+.link {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  grid-gap: 1rem;
+  color: var(--color-grey);
+  text-decoration: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+
+.icon {
+  margin-right: 8px;
+  font-size: 20px;
+  color: var(--color-primary);
+}

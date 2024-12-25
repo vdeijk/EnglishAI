@@ -1,0 +1,23 @@
+.card {
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  background-color: var(--color-primary-tinted);
+  transition: 0.2s all;
+}
+
+.card:hover {
+  cursor: pointer;
+  background-color: var(--color-primary);
+}
+
+.icon {
+  margin-right: 10px;
+  font-size: 48px;
+  color: var(--color-tertiary);
+}

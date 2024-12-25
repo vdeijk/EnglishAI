@@ -1,0 +1,20 @@
+.container {
+  margin-top: 10rem;
+  padding: 2rem;
+  display: grid;
+  justify-content: center;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.buttonContainer {
+  margin-top: 2rem;
+}

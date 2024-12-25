@@ -1,0 +1,30 @@
+.button {
+    font-size: 2.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 1rem 3rem;
+    height: max-content;
+    background-color: var(--color-primary);
+    width: max-content;
+    color: var(--color-black);
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    grid-gap: 1rem;
+  }
+  
+  .button:hover {
+    background-color: #ddd;
+  }
+  
+  .button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .icon {
+    font-size: 2rem;
+    color: var(--color-secondary);
+  }

@@ -1,0 +1,33 @@
+.container {
+  margin-top: 10rem;
+  margin-left: 24rem;
+  padding: 20px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+
+.plans {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.tiers {
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2rem;
+}
+
+.description {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #555;
+}

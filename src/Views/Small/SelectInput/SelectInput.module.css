@@ -1,0 +1,10 @@
+.formGroup label {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.select {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.6rem;
+}

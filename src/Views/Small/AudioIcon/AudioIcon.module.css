@@ -1,0 +1,11 @@
+.audioIcon {
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 24px;
+    color: var(--color-tertiary);
+    transition: color 0.3s ease;
+  }
+  
+  .audioIcon:hover {
+    color: var(--color-primary-shaded);
+  }
