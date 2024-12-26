@@ -6,19 +6,19 @@
   color: white;
   height: max-content;
   display: grid;
-  grid-template-columns: 1fr max-content;
-  grid-gap: 1rem;
+  justify-content: end;
+  grid-gap: 2rem;
+  grid-auto-flow: column;
   align-items: center;
-  padding: 1rem;
+  width: 100%;
+  background-color: var(--color-black);
 }
 
 .profileLink {
-  grid-column: 2/-1;
   display: grid;
   grid-auto-flow: column;
   justify-content: end;
   align-items: center;
-  background-color: var(--color-black);
   font-size: 1.6rem;
   color: var(--color-grey);
   text-decoration: none;
@@ -38,6 +38,7 @@
   font-size: 20px;
 }
 
-.scoreContainer {
-  grid-column: 1/-1;
+
+.logo {
+  color: var(--color-primary);
 }

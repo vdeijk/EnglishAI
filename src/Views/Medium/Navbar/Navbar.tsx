@@ -8,13 +8,11 @@ import { observer } from "mobx-react";
 const Navbar = observer(() => {
   return (
     <div className={styles.navbar}>
-      <div className={styles.scoreContainer}>
-        <SidebarScore
-          totalScore={scoreStore.totalScore}
-          todayScore={scoreStore.todayScore}
-          threshold={scoreStore.threshold}
-        />
-      </div>
+      <SidebarScore
+        totalScore={scoreStore.totalScore}
+        todayScore={scoreStore.todayScore}
+        threshold={scoreStore.threshold}
+      />
       <Link to="/profile" className={styles.profileLink}>
         <FaUser className={styles.icon} />
         Profile

@@ -3,11 +3,11 @@ import { makeAutoObservable } from "mobx";
 class NavigationStore {
   sidebarLinks: { name: string; link: string; iconName: string }[] = [
     { name: "Dashboard", link: "/", iconName: "FaTachometerAlt" },
-    { name: "Profile", link: "/profile", iconName: "FaUser" },
     { name: "Conversations", link: "/conversations", iconName: "FaComments" },
     { name: "Vocabulary", link: "/vocabulary", iconName: "FaBook" },
     { name: "Progress", link: "/progress", iconName: "FaChartLine" },
     { name: "Pricing", link: "/upgrade", iconName: "FaStar" },
+    { name: "Profile", link: "/profile", iconName: "FaUser" },
     { name: "Logout", link: "/", iconName: "FaSignOutAlt" },
   ];
 

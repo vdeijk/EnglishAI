@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../../Small/Button/Button";
 import styles from "./PricingTier.module.css";
 import { FaCheck } from "react-icons/fa";
-import pricingPlanStore from "../../../Stores/PricingPLanStore";
+import pricingPlanStore from "../../../Stores/PricingPlanStore";
 
 interface TierProps {
   title: string;

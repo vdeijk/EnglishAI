@@ -1,7 +1,16 @@
-.cards {
+.dashboard {
   display: grid;
   grid-gap: 2rem;
   margin-top: 10rem;
+  justify-content: center;
+}
+
+.cards {
+  display: grid;
+  grid-gap: 2rem;
   grid-auto-flow: column;
   justify-content: center;
+}
+
+.h1 {
 }

@@ -1,7 +1,6 @@
 .sidebar {
   height: 100%;
   background-color: var(--color-black);
-  padding: 2rem;
   position: fixed;
   left: 0;
   top: 0;
@@ -9,6 +8,8 @@
   justify-content: center;
   align-content: start;
   grid-gap: 2rem;
+  z-index: 100;
+  padding: 6rem 2rem 2rem 2rem;
 }
 
 .list {

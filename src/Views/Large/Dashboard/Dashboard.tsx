@@ -15,15 +15,18 @@ const Dashboard: React.FC = observer(() => {
   };
 
   return (
-    <div className={styles.cards}>
-      {navigationStore.cards.map((card, index) => (
-        <Card
-          key={index}
-          icon={getIcon(card.iconName)}
-          name={card.name}
-          onClick={() => navigate(card.link)}
-        />
-      ))}
+    <div className={styles.dashboard}>
+      <h1 className={styles.h1}>What do you want to work on today?</h1>
+      <div className={styles.cards}>
+        {navigationStore.cards.map((card, index) => (
+          <Card
+            key={index}
+            icon={getIcon(card.iconName)}
+            name={card.name}
+            onClick={() => navigate(card.link)}
+          />
+        ))}
+      </div>
     </div>
   );
 });

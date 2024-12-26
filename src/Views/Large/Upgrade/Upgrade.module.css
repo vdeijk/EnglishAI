@@ -1,27 +1,28 @@
-.container {
+.plan {
   margin-top: 10rem;
-  padding: 20px;
   display: grid;
   align-items: center;
   justify-content: center;
 }
 
+.container {
+  max-width: 90rem;
+  display: grid;
+  text-align: center;
+}
+
 .title {
-  color: var(--color-primary);
   margin-bottom: 20px;
 }
 
-.plans {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
 
 .tiers {
+  justify-self: center;
   display: grid;
-  justify-content: space-around;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 2rem;
+  width: max-content;
+  justify-content: center;
 }
 
 .description {

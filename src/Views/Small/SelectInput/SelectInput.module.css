@@ -1,5 +1,10 @@
+.formGroup {
+  display: grid;
+  grid-gap: 0.5rem;
+  width: 40rem;
+}
+
 .formGroup label {
-  margin-bottom: 0.5rem;
   font-size: 1.8rem;
 }
 
