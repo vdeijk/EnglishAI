@@ -9,6 +9,8 @@ const VocabularyAnswer: React.FC = observer(() => {
   const navigate = useNavigate();
   const { currentWordInfo, userAnswer } = vocabularyStore;
 
+  const dictionaryUrl = `https://www.oxfordlearnersdictionaries.com/definition/english/${currentWordInfo.word}`;
+
   const handleNextQuestion = () => {
     vocabularyStore.fetchNewQuestion();
     navigate("/vocabulary");
@@ -24,6 +26,14 @@ const VocabularyAnswer: React.FC = observer(() => {
         <strong> {currentWordInfo.word} </strong>?
       </h6>
       <h6 className={styles.h6}>Your answer: {userAnswer?.text} </h6>
+      <a
+        className={styles.dictionaryLink}
+        href={dictionaryUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View in Oxford Learner's Dictionaries
+      </a>
       <div className={styles.button}>
         <Button label="Next Question" onClick={handleNextQuestion} />
       </div>

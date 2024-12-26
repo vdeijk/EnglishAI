@@ -6,6 +6,8 @@ const MERRIAM_WEBSTER_LEARNER_API_URL =
 const MERRIAM_WEBSTER_API_KEY = import.meta.env
   .VITE_MERRIAM_WEBSTER_LEARNERS_API_KEY;
 
+const AUDIO_BASE_URL =
+  "https://www.dictionaryapi.com/api/v3/references/learners/json";
 const cleanExampleSentence = (sentence: string): string => {
   return sentence.replace(/{[^}]+}/g, "");
 };
@@ -38,7 +40,7 @@ export const fetchWordInfo = async (word: string): Promise<WordInfo> => {
       definition,
       exampleSentence,
       options: [],
-      audioSrc: audioSrc
+      audioUrl: audioSrc
         ? `https://media.merriam-webster.com/audio/prons/en/us/mp3/${audioSrc[0]}/${audioSrc}.mp3`
         : undefined,
     };
@@ -51,7 +53,31 @@ export const fetchWordInfo = async (word: string): Promise<WordInfo> => {
       definition: "No definition available.",
       exampleSentence: "No example available.",
       options: [],
-      audioSrc: "",
+      audioUrl: "",
     };
+  }
+};
+
+export const fetchWordAudio = async (word: string): Promise<string | null> => {
+  try {
+    const response = await fetch(
+      `${AUDIO_BASE_URL}/${word}?key=${MERRIAM_WEBSTER_API_KEY}`
+    );
+    const data = await response.json();
+    if (
+      data.length > 0 &&
+      data[0].hwi &&
+      data[0].hwi.prs &&
+      data[0].hwi.prs[0].sound
+    ) {
+      const audioFile = data[0].hwi.prs[0].sound.audio;
+      return `https://media.merriam-webster.com/audio/prons/en/us/mp3/${audioFile.charAt(
+        0
+      )}/${audioFile}.mp3`;
+    }
+    return null;
+  } catch (error) {
+    console.error("Error fetching audio URL:", error);
+    return null;
   }
 };

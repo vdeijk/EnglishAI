@@ -18,3 +18,12 @@
 .button {
   margin-top: 3rem;
 }
+
+.dictionaryLink {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+.dictionaryLink:hover {
+  text-decoration: underline;
+}

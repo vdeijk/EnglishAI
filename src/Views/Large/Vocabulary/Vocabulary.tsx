@@ -55,7 +55,7 @@ const Vocabulary = observer(() => {
       {displayCongratulationsPopup()}
       <h1 className={styles.h1}>
         {currentWordInfo?.word}
-        <AudioIcon audioSrc={`/audio/${currentWordInfo?.word}.mp3`} />
+        <AudioIcon audioUrl={vocabularyStore.currentWordInfo.audioUrl} />
       </h1>
       <h6 className={styles.h6Example}>{getStyledSentence()}</h6>
       <h6 className={styles.h6Question}>

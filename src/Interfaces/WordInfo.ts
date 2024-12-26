@@ -5,5 +5,5 @@ export default interface WordInfo {
   exampleSentence: string;
   options: OptionType[];
   definition: string;
-  audioSrc: string | undefined;
+  audioUrl: string | undefined;
 }

@@ -5,6 +5,7 @@ import OptionType from "../Interfaces/OptionType";
 import WordInfo from "../Interfaces/WordInfo";
 import { wrongDefinitions } from "../Data/wrongDefinitions";
 import { AnswerStatus } from "../Enums/AnswerStatus";
+import { fetchWordAudio } from "../Apis/get";
 
 class VocabularyStore {
   allWordList: string[] = [
@@ -27,7 +28,7 @@ class VocabularyStore {
     exampleSentence: "",
     options: [],
     definition: "",
-    audioSrc: "",
+    audioUrl: "",
   };
   userAnswer: OptionType | null = null;
   loading: boolean = false;
@@ -37,7 +38,6 @@ class VocabularyStore {
     makeAutoObservable(this, {
       setUserAnswer: action,
       fetchNewQuestion: action,
-      addCurrentWordInfo: action,
       reset: action,
       randomizeWordList: action,
     });
@@ -65,22 +65,23 @@ class VocabularyStore {
         this.loading = true;
         this.currentWordIndex++;
       });
-      const wordInfo = await fetchWordInfo(
-        this.currentWordList[this.currentWordIndex]
-      );
+
+      const currentWord = this.currentWordList[this.currentWordIndex];
+      const [wordInfo, audioUrl] = await Promise.all([
+        fetchWordInfo(currentWord),
+        fetchWordAudio(currentWord),
+      ]);
+
       runInAction(() => {
-        this.addCurrentWordInfo(wordInfo);
+        this.currentWordInfo = {
+          ...wordInfo,
+          options: this.setWordInfoOptions(wordInfo.definition),
+          audioUrl: audioUrl ?? undefined,
+        };
         this.userAnswer = null;
         this.loading = false;
       });
     }
-  }
-
-  public addCurrentWordInfo(wordInfo: WordInfo) {
-    runInAction(() => {
-      wordInfo.options = this.setWordInfoOptions(wordInfo.definition);
-      this.currentWordInfo = wordInfo;
-    });
   }
 
   public reset() {
@@ -133,3 +134,24 @@ class VocabularyStore {
 
 const vocabularyStore = new VocabularyStore();
 export default vocabularyStore;
+
+/*
+
+  public addCurrentWordInfo(wordInfo: WordInfo) {
+    runInAction(() => {
+      wordInfo.options = this.setWordInfoOptions(wordInfo.definition);
+      this.currentWordInfo = wordInfo;
+    });
+  }
+  private async fetchAudio() {
+    if (vocabularyStore.currentWordInfo?.word) {
+      const url = await fetchWordAudio(this.currentWordInfo.word);
+      runInAction(() => {
+        this.currentWordInfo = {
+          ...this.currentWordInfo,
+          audioUrl: url ?? undefined,
+        };
+      });
+    }
+  }
+*/
