@@ -59,7 +59,7 @@ const Vocabulary = observer(() => {
       </h1>
       <h6 className={styles.h6Example}>{getStyledSentence()}</h6>
       <h6 className={styles.h6Question}>
-        In this sentence, what is the meaning of {currentWordInfo?.word}?
+        In this example, what is the meaning of {currentWordInfo?.word}?
       </h6>
       <ul className={styles.options}>
         {currentWordInfo.options.map((option, index) => (
