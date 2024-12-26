@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 class ScoreStore {
   totalScore: number = 0;
   todayScore: number = 0;
+  threshold: number = 1000;
   scores: { week: number; score: number }[] = [
     { week: 27, score: 50 },
     { week: 28, score: 70 },
@@ -44,6 +45,7 @@ class ScoreStore {
 
   incrementScore(points: number) {
     this.todayScore += points;
+    this.totalScore += points;
     const today = new Date();
     const currentWeek = this.getWeekNumber(today);
     const existingScore = this.scores.find((s) => s.week === currentWeek);

@@ -6,7 +6,7 @@ import Option from "../../Small/VocabularyOption/VocabularyOption";
 import vocabularyStore from "../../../Stores/VocabularyStore";
 import AudioIcon from "../../Small/AudioIcon/AudioIcon";
 import OptionType from "../../../Interfaces/OptionType";
-import ScorePopup from "../../Medium/Popup/ScorePopup";
+import ScorePopup from "../../Medium/ScorePopup/ScorePopup";
 import { AnswerStatus } from "../../../Enums/AnswerStatus";
 
 const Vocabulary = observer(() => {

@@ -1,6 +1,4 @@
-
 .cards {
-  position: relative;
   display: grid;
   grid-gap: 2rem;
   margin-top: 10rem;

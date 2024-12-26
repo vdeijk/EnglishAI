@@ -87,7 +87,6 @@ class VocabularyStore {
     runInAction(() => {
       this.currentWordIndex = 0;
       this.userAnswer = null;
-      scoreStore.resetScore();
       this.fetchNewQuestion();
     });
   }

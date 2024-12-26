@@ -3,14 +3,16 @@ import styles from "./Navbar.module.css";
 import { FaUser } from "react-icons/fa";
 import SidebarScore from "../../Small/SidebarScore/SidebarScore";
 import scoreStore from "../../../Stores/ScoreStore";
+import { observer } from "mobx-react";
 
-const Navbar = () => {
+const Navbar = observer(() => {
   return (
     <div className={styles.navbar}>
       <div className={styles.scoreContainer}>
         <SidebarScore
           totalScore={scoreStore.totalScore}
           todayScore={scoreStore.todayScore}
+          threshold={scoreStore.threshold}
         />
       </div>
       <Link to="/profile" className={styles.profileLink}>
@@ -19,6 +21,6 @@ const Navbar = () => {
       </Link>
     </div>
   );
-};
+});
 
 export default Navbar;

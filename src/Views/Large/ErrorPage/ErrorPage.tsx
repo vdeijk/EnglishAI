@@ -7,7 +7,7 @@ const Error: React.FC = () => {
   const navigate = useNavigate();
 
   const handleReturnToDashboard = () => {
-    navigate("/dashboard");
+    navigate("/");
   };
 
   return (

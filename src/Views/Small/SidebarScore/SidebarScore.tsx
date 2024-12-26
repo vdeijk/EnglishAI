@@ -5,14 +5,16 @@ import styles from "./SidebarScore.module.css";
 interface SidebarScoreProps {
   totalScore: number;
   todayScore: number;
+  threshold: number;
 }
 
 const SidebarScore: React.FC<SidebarScoreProps> = ({
   totalScore,
   todayScore,
+  threshold,
 }) => {
   const icon =
-    todayScore > 0 ? (
+    todayScore > threshold ? (
       <FaSmile className={styles.icon} />
     ) : (
       <FaFrown className={styles.icon} />
