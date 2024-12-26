@@ -7,7 +7,7 @@ class NavigationStore {
     { name: "Conversations", link: "/conversations", iconName: "FaComments" },
     { name: "Vocabulary", link: "/vocabulary", iconName: "FaBook" },
     { name: "Progress", link: "/progress", iconName: "FaChartLine" },
-    { name: "Upgrade", link: "/upgrade", iconName: "FaStar" },
+    { name: "Pricing", link: "/upgrade", iconName: "FaStar" },
     { name: "Logout", link: "/", iconName: "FaSignOutAlt" },
   ];
 

@@ -1,11 +1,11 @@
 import styles from "./Sidebar.module.css";
 import React from "react";
 import SidebarLink from "../../Small/SidebarLink/SidebarLink";
-import SidebarScore from "../../Small/SidebarScore/SidebarScore";
-import scoreStore from "../../../Stores/ScoreStore";
 import { observer } from "mobx-react";
 import { useAuth0 } from "@auth0/auth0-react";
 import SidebarButtonLink from "../../Small/SidebarButtonLink/SidebarButtonLink";
+import { FaStar } from "react-icons/fa";
+import Button from "../../Small/Button/Button";
 
 interface SidebarProps {
   links: SidebarLink[];
@@ -47,10 +47,19 @@ const Sidebar: React.FC<SidebarProps> = observer(({ links }) => {
 
   return (
     <div className={styles.sidebar}>
+      <div className={styles.logo}>
+        <h2 className={styles.logo}> LangRocket.AI</h2>
+      </div>
       <ul className={styles.list}>
         {links.map((link, index) => setupLink(link, index))}
       </ul>
-      <SidebarScore score={scoreStore.score} />
+      <Button
+        label="Upgrade now"
+        onClick={() => {}}
+        type="button"
+        disabled={false}
+        icon={<FaStar />}
+      />
     </div>
   );
 });

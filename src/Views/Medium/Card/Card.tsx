@@ -10,7 +10,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ icon, name, onClick }) => {
   return (
     <div className={styles.card} onClick={onClick}>
-      <h6>{name}</h6>
+      <h3 className={styles.h4}>{name}</h3>
       <div className={styles.icon}>{icon}</div>
     </div>
   );

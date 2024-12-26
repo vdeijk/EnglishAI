@@ -1,34 +1,43 @@
 .navbar {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
-  background-color: var(--color-black);
+  right: 0;
+  width: max-content;
   color: white;
-  padding: 1rem 3rem;
   height: max-content;
-  z-index: 100;
   display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-gap: 1rem;
   align-items: center;
-  justify-content: space-between;
-  align-items: center;
-  grid-template-columns: max-content max-content max-content;
+  padding: 1rem;
 }
 
 .profileLink {
-  display: flex;
+  grid-column: 2/-1;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: end;
   align-items: center;
-  transition: background-color 0.3s ease;
-  font-size: 1.5rem;
+  background-color: var(--color-black);
+  font-size: 1.6rem;
   color: var(--color-grey);
   text-decoration: none;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: max-content;
 }
 
 .profileLink:hover {
   cursor: pointer;
+  color: var(--color-primary);
 }
 
 .icon {
+  color: var(--color-primary);
   margin-right: 8px;
   font-size: 20px;
+}
+
+.scoreContainer {
+  grid-column: 1/-1;
 }

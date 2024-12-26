@@ -40,8 +40,6 @@ const App = observer(() => {
     FaChartLine: <FaChartLine />,
   };
 
-  console.log("app", languageLevel);
-
   const displayCorrectRoute = () => {
     if (!isAuthenticated) {
       return (

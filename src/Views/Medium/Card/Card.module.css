@@ -1,23 +1,27 @@
 .card {
-  width: 200px;
-  height: 200px;
-  border-radius: 8px;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: grid;
   align-items: center;
   justify-content: center;
   justify-items: center;
-  background-color: var(--color-primary-tinted);
+  background-color: var(--color-black);
   transition: 0.2s all;
+  color: var(--color-white);
 }
 
 .card:hover {
   cursor: pointer;
-  background-color: var(--color-primary);
+  background-color: var(--color-tertiary-tinted);
 }
 
 .icon {
   margin-right: 10px;
   font-size: 48px;
   color: var(--color-tertiary);
+}
+
+.h4 {
 }

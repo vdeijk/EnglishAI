@@ -1,16 +1,14 @@
 .sidebar {
-  width: 240px;
   height: 100%;
   background-color: var(--color-black);
-  padding: 6rem;
+  padding: 2rem;
   position: fixed;
   left: 0;
   top: 0;
-  font-size: 2rem;
-  z-index: 1000;
   display: grid;
   justify-content: center;
-  align-content: space-between;
+  align-content: start;
+  grid-gap: 2rem;
 }
 
 .list {
@@ -21,3 +19,6 @@
   justify-items: start;
 }
 
+.logo {
+  color: var(--color-primary);
+}

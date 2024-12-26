@@ -1,7 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
 class ScoreStore {
-  score = 0;
+  totalScore: number = 0;
+  todayScore: number = 0;
   scores: { week: number; score: number }[] = [
     { week: 27, score: 50 },
     { week: 28, score: 70 },
@@ -42,7 +43,7 @@ class ScoreStore {
   }
 
   incrementScore(points: number) {
-    this.score += points;
+    this.todayScore += points;
     const today = new Date();
     const currentWeek = this.getWeekNumber(today);
     const existingScore = this.scores.find((s) => s.week === currentWeek);
@@ -51,10 +52,6 @@ class ScoreStore {
     } else {
       this.scores.push({ week: currentWeek, score: points });
     }
-  }
-
-  resetScore() {
-    this.score = 0;
   }
 
   getScoresForThreeMonths() {
@@ -67,6 +64,14 @@ class ScoreStore {
     console.log(startWeek, endWeek);
 
     return this.scores.filter((s) => s.week >= startWeek && s.week <= endWeek);
+  }
+  
+  setTotalScore(score: number) {
+    this.totalScore = score;
+  }
+
+  setTodayScore(score: number) {
+    this.todayScore = score;
   }
 }
 

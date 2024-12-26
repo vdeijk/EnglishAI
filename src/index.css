@@ -1,13 +1,44 @@
+/* Neue Montreal */
 @font-face {
-  font-family: "Woodland";
-  src: url("./assets/Woodland/PPWoodland-Regular.otf") format("opentype");
+  font-family: "Neue Montreal";
+  src: url("./assets/fonts/NeueMontreal/NeueMontreal-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Woodland";
-  src: url("./assets/Woodland/PPWoodland-Bold.otf") format("opentype");
+  font-family: "Neue Montreal";
+  src: url("./assets/fonts/NeueMontreal/NeueMontreal-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Object Sans */
+@font-face {
+  font-family: "Object Sans";
+  src: url("./assets/fonts/ObjectSans/ObjectSans-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Object Sans";
+  src: url("./assets/fonts/ObjectSans/ObjectSans-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Pangram Sans */
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("./assets/fonts/PangramSans/PangramSans-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pangram Sans";
+  src: url("./assets/fonts/PangramSans/PangramSans-Bold.woff2") format("woff2");
   font-weight: bold;
   font-style: normal;
 }
@@ -31,14 +62,14 @@ html {
   --color-primary: #73eedc;
   --color-primary-tinted: #dcfbf6;
   --color-primary-shaded: #458f84;
-  --color-secondary: #FFE0B5;
-  --color-tertiary: #BC2C1A;
-  --color-primary-shaded: #9E2516;
+  --color-secondary: #ffe0b5;
+  --color-tertiary: #bc2c1a;
+  --color-tertiary-tinted: #e76656;
+  --color-primary-shaded: #9e2516;
   --color-white: #fdfdfd;
   --color-grey: #c0c0c0;
-  --color-black: #222;
+  --color-black: #333;
   --color-black-tinted: #4e4e4e;
-  --font-primary: "Woodland";
 }
 
 body {
@@ -46,9 +77,9 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Woodland", sans-serif;
   background-color: var(--color-white);
   overflow: hidden;
+  font-family: "Object Sans", sans-serif;
 }
 
 h1,
@@ -57,7 +88,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Woodland", sans-serif;
   line-height: 1;
   margin: 0;
   font-weight: normal;
@@ -89,19 +119,13 @@ h6 {
 }
 
 p {
-  font-family: "Woodland", sans-serif;
   font-size: 1.6rem;
   line-height: 1;
   margin: 0;
 }
 
 a {
-  font-family: "Woodland", sans-serif;
   font-size: 1.6rem;
   line-height: 1;
   margin: 0;
-}
-
-button {
-  font-family: "Woodland", sans-serif;
 }
