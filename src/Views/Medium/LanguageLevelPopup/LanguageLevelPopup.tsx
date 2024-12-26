@@ -4,6 +4,7 @@ import profileStore from "../../../Stores/ProfileStore";
 import styles from "./LanguageLevelPopup.module.css";
 import Button from "../../Small/Button/Button";
 import { LanguageLevel } from "../../../Enums/LanguageLevel";
+import SelectInput from "../../Small/SelectInput/SelectInput";
 
 const LanguageLevelPopup: React.FC = observer(() => {
   const popupRef = useRef<HTMLDivElement>(null);
@@ -29,24 +30,29 @@ const LanguageLevelPopup: React.FC = observer(() => {
     //profileStore.setLanguageLevel(selectedLevel);
   };
 
+  const setLanguageOptions = () => {
+    return Object.keys(LanguageLevel).map((key) => ({
+      value: key,
+      label: LanguageLevel[key as keyof typeof LanguageLevel],
+    }));
+  };
+
   return (
     <>
       <div className={styles.overlay}></div>
       <div className={styles.popup} ref={popupRef}>
         <div className={styles.popupContent}>
           <h1 className={styles.title}>Select Your Language Level</h1>
-          <select
+          <SelectInput
+            id="languageLevel"
+            label="Language Level"
             value={profileStore.languageLevel}
             onChange={handleLevelChange}
-            className={styles.select}
-          >
-            {Object.values(LanguageLevel).map((level) => (
-              <option key={level} value={level}>
-                {level}
-              </option>
-            ))}
-          </select>
-          <Button type="button" onClick={handleSave} label="Save" />
+            options={setLanguageOptions()}
+          />
+          <div className={styles.buttonContainer}>
+            <Button type="button" onClick={handleSave} label="Save" />
+          </div>
         </div>
       </div>
     </>
