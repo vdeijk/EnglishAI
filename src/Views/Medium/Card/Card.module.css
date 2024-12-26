@@ -7,14 +7,14 @@
   align-items: center;
   justify-content: center;
   justify-items: center;
-  background-color: var(--color-black);
+  background-color: var(--color-primary-tinted);
   transition: 0.2s all;
-  color: var(--color-white);
+  color: var(--color-black);
 }
 
 .card:hover {
   cursor: pointer;
-  background-color: var(--color-tertiary-tinted);
+  background-color: var(--color-primary);
 }
 
 .icon {
