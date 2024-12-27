@@ -10,10 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@auth0/auth0-react": "^2.2.4",
     "axios": "^1.7.9",
     "bottleneck": "^2.19.5",
     "d3": "^7.9.0",
+    "firebase": "^11.1.0",
     "mobx": "^6.13.5",
     "mobx-react": "^9.2.0",
     "react": "^18.3.1",

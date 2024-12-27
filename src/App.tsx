@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Dashboard from "./Views/Large/Dashboard/Dashboard";
 import Vocabulary from "./Views/Large/Vocabulary/Vocabulary";
 import Sidebar from "./Views/Medium/Sidebar/Sidebar";
@@ -9,7 +9,6 @@ import Progress from "./Views/Large/Progress/Progress";
 import Profile from "./Views/Large/Profile/Profile";
 import Upgrade from "./Views/Large/Upgrade/Upgrade";
 import Conversations from "./Views/Large/Conversations/Conversations";
-import Auth0ProviderWithHistory from "./Configs/Auth0Config";
 import Login from "./Views/Large/Login/Login";
 import {
   FaTachometerAlt,
@@ -20,17 +19,31 @@ import {
   FaSignOutAlt,
   FaChartLine,
 } from "react-icons/fa";
-import { useAuth0 } from "@auth0/auth0-react";
 import Error from "./Views/Large/ErrorPage/ErrorPage";
 import LanguageLevelPopup from "./Views/Medium/LanguageLevelPopup/LanguageLevelPopup";
 import profileStore from "./Stores/ProfileStore";
 import { observer } from "mobx-react";
 import { ToastContainer } from "react-toastify";
 import "./toastify.css";
+import { useState, useEffect } from "react";
+import { onAuthStateChanged, User } from "firebase/auth";
+import firebaseAuth from "./Configs/FirebaseConfig";
 
 const App = observer(() => {
-  const { isAuthenticated } = useAuth0();
   const { languageLevel } = profileStore;
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log("app");
+
+    const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const iconMapper: { [key: string]: JSX.Element } = {
     FaTachometerAlt: <FaTachometerAlt />,
@@ -42,8 +55,13 @@ const App = observer(() => {
     FaChartLine: <FaChartLine />,
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   const displayCorrectRoute = () => {
-    if (!isAuthenticated) {
+    console.log(user);
+    if (user) {
       return (
         <div className="dashboard">
           <ToastContainer />
@@ -77,17 +95,16 @@ const App = observer(() => {
     );
   };
 
-  return (
-    <BrowserRouter>
-      <Auth0ProviderWithHistory>
-        {displayCorrectRoute()}
-      </Auth0ProviderWithHistory>
-    </BrowserRouter>
-  );
+  return <>{displayCorrectRoute()}</>;
 });
 
 export default App;
 
-/*if (isLoading) {
+/*
+  if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
   }*/

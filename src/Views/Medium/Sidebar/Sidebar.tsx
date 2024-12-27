@@ -2,12 +2,12 @@ import styles from "./Sidebar.module.css";
 import React from "react";
 import SidebarLink from "../../Small/SidebarLink/SidebarLink";
 import { observer } from "mobx-react";
-import { useAuth0 } from "@auth0/auth0-react";
 import SidebarButtonLink from "../../Small/SidebarButtonLink/SidebarButtonLink";
 import { FaStar } from "react-icons/fa";
 import Button from "../../Small/Button/Button";
 import { useLocation } from "react-router-dom";
 import { FaRocket } from "react-icons/fa";
+import { signOutWithGoogle } from "../../../Utils/googleAuth";
 
 interface SidebarProps {
   links: SidebarLink[];
@@ -21,11 +21,7 @@ interface SidebarLink {
 
 const Sidebar: React.FC<SidebarProps> = observer(({ links }) => {
   const location = useLocation();
-  const { logout } = useAuth0();
 
-  const handleLogout = () => {
-    logout({ logoutParams: { returnTo: window.location.origin } });
-  };
 
   const setDynamicCss = (isActive: boolean) => {
     if (isActive) {
@@ -36,7 +32,6 @@ const Sidebar: React.FC<SidebarProps> = observer(({ links }) => {
 
   const setupLink = (link: SidebarLink, index: number) => {
     const isActive = location.pathname === link.link;
-    console.log(isActive + " " + link.link);
 
     if (link.name === "Logout") {
       return (
@@ -44,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = observer(({ links }) => {
           key={index}
           name={link.name}
           icon={link.icon}
-          onClick={handleLogout}
+          onClick={signOutWithGoogle}
           dynamicCssClass={setDynamicCss(isActive)}
         />
       );

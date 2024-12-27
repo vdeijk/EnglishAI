@@ -1,7 +1,7 @@
 .Toastify__toast {
-    font-size: 1.8rem; /* Adjust the font size as needed */
-  }
-  
-  .Toastify__toast-body {
-    font-size: 1.8rem; /* Adjust the font size as needed */
-  }
+  font-size: 1.8rem;
+}
+
+.Toastify__toast-body {
+  font-size: 1.8rem;
+}
