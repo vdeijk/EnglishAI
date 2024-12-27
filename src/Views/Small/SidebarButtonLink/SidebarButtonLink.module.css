@@ -30,3 +30,7 @@
     color: var(--color-primary);
   }
   
+.active {
+  background-color: #007bff;
+  color: #fff;
+}

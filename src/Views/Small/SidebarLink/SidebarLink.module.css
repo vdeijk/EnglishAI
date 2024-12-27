@@ -1,7 +1,9 @@
 .sidebarLink {
-  padding: 10px;
-  font-size: 16px;
+  padding: 1rem;
+  font-size: 1.6rem;
   list-style: none;  
+display: grid;
+grid-template-columns: max-content 1fr;
 }
 
 .sidebarLink:hover {

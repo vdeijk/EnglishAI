@@ -5,6 +5,7 @@ interface SidebarButtonLinkProps {
   name: string;
   icon: React.ReactNode;
   onClick: () => void;
+  dynamicCssClass?: string;
 }
 
 const SidebarButtonLink: React.FC<SidebarButtonLinkProps> = ({

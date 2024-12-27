@@ -26,6 +26,7 @@ import LanguageLevelPopup from "./Views/Medium/LanguageLevelPopup/LanguageLevelP
 import profileStore from "./Stores/ProfileStore";
 import { observer } from "mobx-react";
 import { ToastContainer } from "react-toastify";
+import "./toastify.css";
 
 const App = observer(() => {
   const { isAuthenticated } = useAuth0();

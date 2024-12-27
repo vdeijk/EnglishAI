@@ -50,7 +50,7 @@ class ScoreStore {
     } else {
       this.scores.push({ week: currentWeek, score: points });
     }
-    toast.success(`Score increased by ${points}`);
+    toast.success(`Well done! + ${points} points`);
   }
 
   public decrementScore(points: number) {
@@ -64,7 +64,7 @@ class ScoreStore {
     } else {
       this.scores.push({ week: currentWeek, score: -points });
     }
-    toast.error(`Score decreased by ${points}`);
+    toast.error(`Flunk! - ${points} points`);
   }
 
   public calculateTargetScore() {
