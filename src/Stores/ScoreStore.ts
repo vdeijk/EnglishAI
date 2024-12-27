@@ -63,8 +63,6 @@ class ScoreStore {
     const startWeek = this.getWeekNumber(threeMonthsAgo);
     const endWeek = this.getWeekNumber(today);
 
-    console.log(startWeek, endWeek);
-
     return this.scores.filter((s) => s.week >= startWeek && s.week <= endWeek);
   }
   

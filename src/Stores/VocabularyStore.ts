@@ -6,6 +6,12 @@ import WordInfo from "../Interfaces/WordInfo";
 import { wrongDefinitions } from "../Data/wrongDefinitions";
 import { AnswerStatus } from "../Enums/AnswerStatus";
 import { fetchWordAudio } from "../Apis/get";
+import { A1 } from "../Data/A1WordList";
+import { A2 } from "../Data/A2WordList";
+import { B1 } from "../Data/B1WordList";
+import { B2 } from "../Data/B2WordList";
+import { C1 } from "../Data/C1WordList";
+import profileStore from "./ProfileStore";
 
 class VocabularyStore {
   allWordList: string[] = [
@@ -21,7 +27,7 @@ class VocabularyStore {
     "zealous",
   ];
 
-  currentWordList: string[] = [];
+  wordListLength = 10;
   currentWordIndex = -1;
   currentWordInfo: WordInfo = {
     word: "",
@@ -39,9 +45,7 @@ class VocabularyStore {
       setUserAnswer: action,
       fetchNewQuestion: action,
       reset: action,
-      randomizeWordList: action,
     });
-    this.randomizeWordList();
   }
 
   public setOnNavigateNext(callback: () => void) {
@@ -60,16 +64,16 @@ class VocabularyStore {
   }
 
   public async fetchNewQuestion() {
-    if (this.currentWordIndex <= this.currentWordList.length && !this.loading) {
+    if (this.currentWordIndex <= this.wordListLength && !this.loading) {
       runInAction(() => {
         this.loading = true;
         this.currentWordIndex++;
       });
-
-      const currentWord = this.currentWordList[this.currentWordIndex];
+      const wordList = this.getWordListByLevel(profileStore.getLanguageLevel());
+      const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
       const [wordInfo, audioUrl] = await Promise.all([
-        fetchWordInfo(currentWord),
-        fetchWordAudio(currentWord),
+        fetchWordInfo(randomWord),
+        fetchWordAudio(randomWord),
       ]);
 
       runInAction(() => {
@@ -84,23 +88,28 @@ class VocabularyStore {
     }
   }
 
+  public getWordListByLevel(level: string) {
+    switch (level) {
+      case "A1":
+        return A1;
+      case "A2":
+        return A2;
+      case "B1":
+        return B1;
+      case "B2":
+        return B2;
+      case "C1":
+        return C1;
+      default:
+        return [];
+    }
+  }
   public reset() {
     runInAction(() => {
       this.currentWordIndex = 0;
       this.userAnswer = null;
       this.fetchNewQuestion();
     });
-  }
-
-  public randomizeWordList() {
-    this.currentWordList = [...this.allWordList];
-    for (let i = this.currentWordList.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [this.currentWordList[i], this.currentWordList[j]] = [
-        this.currentWordList[j],
-        this.currentWordList[i],
-      ];
-    }
   }
 
   private setWordInfoOptions(correctDefinition: string): OptionType[] {

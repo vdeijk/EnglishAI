@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction, toJS } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { LanguageLevel } from "../Enums/LanguageLevel";
 
 class ProfileStore {
@@ -13,7 +13,7 @@ class ProfileStore {
 
   preferredLanguage = "";
   learningLanguage = "";
-  languageLevel: LanguageLevel | "" = "";
+  languageLevel: LanguageLevel = LanguageLevel.B1;
   password = "";
   confirmPassword = "";
 
@@ -21,30 +21,29 @@ class ProfileStore {
     makeAutoObservable(this);
   }
 
-  setPreferredLanguage(language: string) {
+  public setPreferredLanguage(language: string) {
     this.preferredLanguage = language;
   }
 
-  setLearningLanguage(language: string) {
+  public setLearningLanguage(language: string) {
     this.learningLanguage = language;
   }
 
-  setLanguageLevel(level: LanguageLevel) {
+  public setLanguageLevel(level: LanguageLevel) {
     runInAction(() => {
       this.languageLevel = level;
     });
-    console.log(toJS(this.languageLevel));
   }
 
-  setPassword(password: string) {
+  public setPassword(password: string) {
     this.password = password;
   }
 
-  setConfirmPassword(confirmPassword: string) {
+  public setConfirmPassword(confirmPassword: string) {
     this.confirmPassword = confirmPassword;
   }
 
-  saveProfile() {
+  public saveProfile() {
     // Handle save logic here
     console.log({
       preferredLanguage: this.preferredLanguage,
@@ -53,6 +52,10 @@ class ProfileStore {
       password: this.password,
       confirmPassword: this.confirmPassword,
     });
+  }
+
+  public getLanguageLevel() {
+    return this.languageLevel;
   }
 }
 

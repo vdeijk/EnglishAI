@@ -13,7 +13,6 @@ interface TierProps {
 
 const Tier: React.FC<TierProps> = ({ title, price, features, onSelect }) => {
   const setTierTitle = () => {
-    console.log("title ", pricingPlanStore.currentPlan, title);
     if (pricingPlanStore.currentPlan === title) {
       return "Current Plan";
     }

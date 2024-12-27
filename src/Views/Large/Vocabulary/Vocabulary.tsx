@@ -44,7 +44,7 @@ const Vocabulary = observer(() => {
 
   const displayCongratulationsPopup = () => {
     if (
-      vocabularyStore.currentWordIndex >= vocabularyStore.currentWordList.length
+      vocabularyStore.currentWordIndex >= vocabularyStore.wordListLength
     ) {
       return <ScorePopup />;
     }
