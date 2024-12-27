@@ -11,7 +11,7 @@ const Navbar = observer(() => {
       <SidebarScore
         totalScore={scoreStore.totalScore}
         todayScore={scoreStore.todayScore}
-        threshold={scoreStore.threshold}
+        targetScore={scoreStore.targetScore}
       />
       <Link to="/profile" className={styles.profileLink}>
         <FaUser className={styles.icon} />

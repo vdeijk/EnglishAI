@@ -3,24 +3,29 @@ import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Vocabulary.module.css";
 import Option from "../../Small/VocabularyOption/VocabularyOption";
-import vocabularyStore from "../../../Stores/VocabularyStore";
+import wordStore from "../../../Stores/WordStore";
 import AudioIcon from "../../Small/AudioIcon/AudioIcon";
 import OptionType from "../../../Interfaces/OptionType";
 import ScorePopup from "../../Medium/ScorePopup/ScorePopup";
 import { AnswerStatus } from "../../../Enums/AnswerStatus";
+import scoreStore from "../../../Stores/ScoreStore";
 
 const Vocabulary = observer(() => {
   useEffect(() => {
-    vocabularyStore.fetchNewQuestion();
+    wordStore.fetchNewQuestion();
   }, []);
 
   const navigate = useNavigate();
-  const { currentWordInfo } = vocabularyStore;
+  const { currentWordInfo } = wordStore;
 
-  const handleOptionClick = (option: OptionType) => {
-    vocabularyStore.setUserAnswer(option);
-    if (option.isCorrect !== AnswerStatus.Unsure)
-      navigate("/vocabulary-answer");
+  const handleOptionClick = (answer: OptionType) => {
+    navigate("/vocabulary-answer");
+
+    if (answer.isCorrect === AnswerStatus.Correct) {
+      scoreStore.incrementScore(100);
+    } else if (answer.text !== "E. I don't know") {
+      scoreStore.decrementScore(50);
+    }
   };
 
   const getStyledSentence = () => {
@@ -43,9 +48,7 @@ const Vocabulary = observer(() => {
   };
 
   const displayCongratulationsPopup = () => {
-    if (
-      vocabularyStore.currentWordIndex >= vocabularyStore.wordListLength
-    ) {
+    if (wordStore.currentWordIndex >= wordStore.wordListLength) {
       return <ScorePopup />;
     }
   };
@@ -55,7 +58,7 @@ const Vocabulary = observer(() => {
       {displayCongratulationsPopup()}
       <h1 className={styles.h1}>
         {currentWordInfo?.word}
-        <AudioIcon audioUrl={vocabularyStore.currentWordInfo.audioUrl} />
+        <AudioIcon audioUrl={wordStore.currentWordInfo.audioUrl} />
       </h1>
       <h6 className={styles.h6Example}>{getStyledSentence()}</h6>
       <h6 className={styles.h6Question}>

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import vocabularyStore from "../../../Stores/VocabularyStore";
+import vocabularyStore from "../../../Stores/WordStore";
 import scoreStore from "../../../Stores/ScoreStore";
 import styles from "./ScorePopup.module.css";
 import Button from "../../Small/Button/Button";

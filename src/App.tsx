@@ -25,6 +25,7 @@ import Error from "./Views/Large/ErrorPage/ErrorPage";
 import LanguageLevelPopup from "./Views/Medium/LanguageLevelPopup/LanguageLevelPopup";
 import profileStore from "./Stores/ProfileStore";
 import { observer } from "mobx-react";
+import { ToastContainer } from "react-toastify";
 
 const App = observer(() => {
   const { isAuthenticated } = useAuth0();
@@ -44,6 +45,7 @@ const App = observer(() => {
     if (!isAuthenticated) {
       return (
         <div className="dashboard">
+          <ToastContainer />
           {!languageLevel && <LanguageLevelPopup />}
           <Sidebar
             links={navigationStore.sidebarLinks.map((link) => ({

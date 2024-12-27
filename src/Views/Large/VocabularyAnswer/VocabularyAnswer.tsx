@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import styles from "./VocabularyAnswer.module.css";
-import vocabularyStore from "../../../Stores/VocabularyStore";
+import vocabularyStore from "../../../Stores/WordStore";
 import Button from "../../Small/Button/Button";
 
 const VocabularyAnswer: React.FC = observer(() => {

@@ -1,9 +1,10 @@
 import { makeAutoObservable } from "mobx";
+import { toast } from "react-toastify";
 
 class ScoreStore {
   totalScore: number = 0;
   todayScore: number = 0;
-  threshold: number = 1000;
+  targetScore: number = 1000;
   scores: { week: number; score: number }[] = [
     { week: 27, score: 50 },
     { week: 28, score: 70 },
@@ -35,15 +36,10 @@ class ScoreStore {
 
   constructor() {
     makeAutoObservable(this);
+    this.calculateTargetScore();
   }
 
-  private getWeekNumber(date: Date): number {
-    const startOfYear = new Date(date.getFullYear(), 0, 1);
-    const pastDaysOfYear = (date.getTime() - startOfYear.getTime()) / 86400000;
-    return Math.ceil((pastDaysOfYear + startOfYear.getDay() + 1) / 7);
-  }
-
-  incrementScore(points: number) {
+  public incrementScore(points: number) {
     this.todayScore += points;
     this.totalScore += points;
     const today = new Date();
@@ -54,9 +50,33 @@ class ScoreStore {
     } else {
       this.scores.push({ week: currentWeek, score: points });
     }
+    toast.success(`Score increased by ${points}`);
   }
 
-  getScoresForThreeMonths() {
+  public decrementScore(points: number) {
+    this.totalScore -= points;
+    this.todayScore -= points;
+
+    const currentWeek = this.getWeekNumber(new Date());
+    const existingScore = this.scores.find((s) => s.week === currentWeek);
+    if (existingScore) {
+      existingScore.score -= points;
+    } else {
+      this.scores.push({ week: currentWeek, score: -points });
+    }
+    toast.error(`Score decreased by ${points}`);
+  }
+
+  public calculateTargetScore() {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayWeek = this.getWeekNumber(yesterday);
+
+    const yesterdayScore = this.scores.find((s) => s.week === yesterdayWeek);
+    this.targetScore = yesterdayScore ? yesterdayScore.score : 0;
+  }
+
+  public getScoresForThreeMonths() {
     const today = new Date();
     const threeMonthsAgo = new Date(today);
     threeMonthsAgo.setMonth(today.getMonth() - 3);
@@ -65,13 +85,19 @@ class ScoreStore {
 
     return this.scores.filter((s) => s.week >= startWeek && s.week <= endWeek);
   }
-  
-  setTotalScore(score: number) {
+
+  public setTotalScore(score: number) {
     this.totalScore = score;
   }
 
-  setTodayScore(score: number) {
+  public setTodayScore(score: number) {
     this.todayScore = score;
+  }
+
+  private getWeekNumber(date: Date): number {
+    const startOfYear = new Date(date.getFullYear(), 0, 1);
+    const pastDaysOfYear = (date.getTime() - startOfYear.getTime()) / 86400000;
+    return Math.ceil((pastDaysOfYear + startOfYear.getDay() + 1) / 7);
   }
 }
 

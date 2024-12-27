@@ -1,5 +1,4 @@
 import { makeAutoObservable, action, runInAction } from "mobx";
-import scoreStore from "./ScoreStore";
 import { fetchWordInfo } from "../Apis/get";
 import OptionType from "../Interfaces/OptionType";
 import WordInfo from "../Interfaces/WordInfo";
@@ -13,20 +12,7 @@ import { B2 } from "../Data/B2WordList";
 import { C1 } from "../Data/C1WordList";
 import profileStore from "./ProfileStore";
 
-class VocabularyStore {
-  allWordList: string[] = [
-    "ubiquitous",
-    "ephemeral",
-    "gregarious",
-    "obfuscate",
-    "mellifluous",
-    "quixotic",
-    "laconic",
-    "serendipity",
-    "voracious",
-    "zealous",
-  ];
-
+class WordStore {
   wordListLength = 10;
   currentWordIndex = -1;
   currentWordInfo: WordInfo = {
@@ -36,31 +22,13 @@ class VocabularyStore {
     definition: "",
     audioUrl: "",
   };
-  userAnswer: OptionType | null = null;
   loading: boolean = false;
-  onNavigateNext: () => void = () => {};
 
   constructor() {
     makeAutoObservable(this, {
-      setUserAnswer: action,
       fetchNewQuestion: action,
       reset: action,
     });
-  }
-
-  public setOnNavigateNext(callback: () => void) {
-    this.onNavigateNext = callback;
-  }
-
-  public setUserAnswer(answer: OptionType) {
-    this.userAnswer = answer;
-    if (answer.text === "E. I don't know") {
-      this.fetchNewQuestion();
-    } else if (answer.isCorrect === AnswerStatus.Correct) {
-      runInAction(() => {
-        scoreStore.incrementScore(100);
-      });
-    }
   }
 
   public async fetchNewQuestion() {
@@ -82,7 +50,6 @@ class VocabularyStore {
           options: this.setWordInfoOptions(wordInfo.definition),
           audioUrl: audioUrl ?? undefined,
         };
-        this.userAnswer = null;
         this.loading = false;
       });
     }
@@ -104,15 +71,29 @@ class VocabularyStore {
         return [];
     }
   }
+
   public reset() {
     runInAction(() => {
       this.currentWordIndex = 0;
-      this.userAnswer = null;
       this.fetchNewQuestion();
     });
   }
 
   private setWordInfoOptions(correctDefinition: string): OptionType[] {
+    const options = this.addOptions(correctDefinition);
+    const optionArray = this.transformToOptionTypes(options, correctDefinition);
+    const shuffledOptions = this.shuffleOptions(optionArray);
+
+    shuffledOptions.push({
+      label: "E.",
+      text: "E. I don't know",
+      isCorrect: AnswerStatus.Unsure,
+    });
+
+    return optionArray;
+  }
+
+  private addOptions(correctDefinition: string) {
     const options = new Set<string>();
     options.add(correctDefinition);
 
@@ -124,43 +105,30 @@ class VocabularyStore {
       }
     }
 
-    const optionArray = Array.from(options).map((option, index) => ({
+    return Array.from(options);
+  }
+
+  private transformToOptionTypes(options: string[], correctDefinition: string) {
+    return options.map((option, index) => ({
       text: `${String.fromCharCode(65 + index)}. ${option}`,
       isCorrect:
         option === correctDefinition
           ? AnswerStatus.Correct
           : AnswerStatus.Incorrect,
     }));
+  }
 
-    optionArray.push({
-      text: "E. I don't know",
-      isCorrect: AnswerStatus.Unsure,
-    });
-
-    return optionArray;
+  private shuffleOptions(options: OptionType[]) {
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    return options.map((option, index) => ({
+      ...option,
+      label: String.fromCharCode(65 + index) + ".",
+    }));
   }
 }
 
-const vocabularyStore = new VocabularyStore();
-export default vocabularyStore;
-
-/*
-
-  public addCurrentWordInfo(wordInfo: WordInfo) {
-    runInAction(() => {
-      wordInfo.options = this.setWordInfoOptions(wordInfo.definition);
-      this.currentWordInfo = wordInfo;
-    });
-  }
-  private async fetchAudio() {
-    if (vocabularyStore.currentWordInfo?.word) {
-      const url = await fetchWordAudio(this.currentWordInfo.word);
-      runInAction(() => {
-        this.currentWordInfo = {
-          ...this.currentWordInfo,
-          audioUrl: url ?? undefined,
-        };
-      });
-    }
-  }
-*/
+const wordStore = new WordStore();
+export default wordStore;
