@@ -1,0 +1,7 @@
+[
+  { "name": "apple", "definition": "A fruit", "status": "cleared", "languageLevel": "A1", "correct": 5 },
+  { "name": "banana", "definition": "A yellow fruit", "status": "in-progress", "languageLevel": "A2", "correct": 3 },
+  { "name": "cherry", "definition": "A small red fruit", "status": "not-started", "languageLevel": "B1", "correct": 0 },
+  { "name": "date", "definition": "A sweet fruit", "status": "cleared", "languageLevel": "B2", "correct": 4 },
+  { "name": "elderberry", "definition": "A dark purple fruit", "status": "in-progress", "languageLevel": "C1", "correct": 2 }
+]

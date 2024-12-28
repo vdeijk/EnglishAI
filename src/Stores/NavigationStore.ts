@@ -8,6 +8,7 @@ class NavigationStore {
     { name: "Progress", link: "/progress", iconName: "FaChartLine" },
     { name: "Pricing", link: "/upgrade", iconName: "FaStar" },
     { name: "Profile", link: "/profile", iconName: "FaUser" },
+    { name: "Statistics", link: "/statistics", iconName: "FaUser" },
     { name: "Logout", link: "/", iconName: "FaSignOutAlt" },
   ];
 

@@ -6,6 +6,7 @@ interface TextInputProps {
   label: string;
   type?: string;
   value: string;
+  placeholder?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -14,6 +15,7 @@ const TextInput: React.FC<TextInputProps> = ({
   label,
   type = "text",
   value,
+  placeholder,
   onChange,
 }) => {
   return (
@@ -25,6 +27,7 @@ const TextInput: React.FC<TextInputProps> = ({
         value={value}
         onChange={onChange}
         className={styles.input}
+        placeholder={placeholder}
       />
     </div>
   );

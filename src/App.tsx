@@ -28,6 +28,7 @@ import "./toastify.css";
 import { useState, useEffect } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import firebaseAuth from "./Configs/FirebaseConfig";
+import Statistics from "./Views/Large/Statistics/Statistics";
 
 const App = observer(() => {
   const { languageLevel } = profileStore;
@@ -60,7 +61,6 @@ const App = observer(() => {
   }
 
   const displayCorrectRoute = () => {
-    console.log(user);
     if (user) {
       return (
         <div className="dashboard">
@@ -82,6 +82,7 @@ const App = observer(() => {
             <Route path="/upgrade" element={<Upgrade />} />
             <Route path="/" element={<Dashboard />} />
             <Route path="/conversations" element={<Conversations />} />
+            <Route path="/statistics" element={<Statistics />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </div>
