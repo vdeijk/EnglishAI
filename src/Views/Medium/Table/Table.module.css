@@ -1,9 +1,16 @@
+.tableContainer {
+  max-height: 400px; /* Set a fixed height for the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+  width: 100%;
+}
+
 .table {
     display: table;
     width: 100rem;
     border-collapse: collapse;
     font-size: 1.6rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
     
   }
   
@@ -17,5 +24,5 @@
   .table th {
     background-color: var(--color-black);
     color: var(--color-primary);
-    
+
   }

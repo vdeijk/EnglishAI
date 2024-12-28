@@ -7,16 +7,20 @@ import TextInput from "../../Small/TextInput/TextInput";
 import statisticsStore from "../../../Stores/StatisticsStore";
 import Table from "../../Medium/Table/Table";
 import Word from "../../../Interfaces/Word";
+import Pagination from "../../Medium/Pagination/Pagination";
 
 const Statistics: React.FC = observer(() => {
   const {
     languageLevel,
     wordStatus,
     searchQuery,
-    filteredWords,
+    paginatedWords,
+    totalPages,
+    currentPage,
     setLanguageLevel,
     setWordStatus,
     setSearchQuery,
+    setCurrentPage,
   } = statisticsStore;
 
   const languageLevelOptions = [
@@ -38,10 +42,12 @@ const Statistics: React.FC = observer(() => {
     { header: "Name", accessor: "name" as keyof Word },
     { header: "Definition", accessor: "definition" as keyof Word },
     { header: "Status", accessor: "status" as keyof Word },
-    { header: "Language Level", accessor: "languageLevel" as keyof Word }, 
-    { header: "Correct", accessor: "correct" as keyof Word }, 
+    { header: "Language Level", accessor: "languageLevel" as keyof Word },
+    { header: "Correct (all time)", accessor: "correct" as keyof Word },
+    { header: "Incorrect (all time)", accessor: "incorrect" as keyof Word },
+    { header: "Streak", accessor: "streak" as keyof Word },
   ];
-  
+
   return (
     <div className={styles.container}>
       <div className={styles.menu}>
@@ -67,7 +73,12 @@ const Statistics: React.FC = observer(() => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-      <Table columns={columns} data={filteredWords} />
+      <Table columns={columns} data={paginatedWords} />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 });

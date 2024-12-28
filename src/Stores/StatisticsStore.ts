@@ -8,6 +8,8 @@ class StatisticsStore {
   searchQuery: string = "";
   words: Word[] = [];
   filteredWords: Word[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 20;
 
   constructor() {
     makeAutoObservable(this);
@@ -30,6 +32,10 @@ class StatisticsStore {
     this.filterWords();
   };
 
+  setCurrentPage = (page: number) => {
+    this.currentPage = page;
+  };
+  
   fetchWords = () => {
     this.words = wordsData;
     this.filterWords();
@@ -43,6 +49,16 @@ class StatisticsStore {
         (this.languageLevel === "" || word.languageLevel === this.languageLevel)
     );
   };
+
+  get paginatedWords() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.filteredWords.slice(startIndex, endIndex);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.filteredWords.length / this.itemsPerPage);
+  }
 }
 
 const statisticsStore = new StatisticsStore();
