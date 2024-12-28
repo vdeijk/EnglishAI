@@ -1,0 +1,18 @@
+
+.pagination {
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+  }
+
+  .pagination:hover {
+    background-color: var(--color-primary-shaded);
+    cursor: pointer;
+  }
+  
+  .pagination:disabled {
+    background-color: var(--color-grey);
+    cursor: not-allowed;
+  }

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Pagination.module.css";
+import styles from "./PaginationButton.module.css";
 
 interface PaginationButtonProps {
   title: string;
@@ -10,13 +10,16 @@ interface PaginationButtonProps {
 const PaginationButton: React.FC<PaginationButtonProps> = ({
   onPageChange,
   title,
+  disabled,
 }) => {
   return (
-    <div className={styles.pagination}>
-      <button onClick={() => onPageChange()} disabled>
-        {title}
-      </button>
-    </div>
+    <button
+      onClick={() => onPageChange()}
+      disabled={disabled}
+      className={styles.pagination}
+    >
+      {title}
+    </button>
   );
 };
 
